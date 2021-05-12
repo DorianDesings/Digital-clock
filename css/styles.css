@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: digital;
+  src: url(../assets/fonts/digital-7/digital-7.ttf);
+}
+
+body {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  min-height: 100vh;
+  font-size: 10rem;
+  background-color: #333;
+  font-family: digital;
+  color: rgb(0 0 0 / 0.1);
+}
+
+.clock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  outline: 2px solid cyan;
+  width: 550px;
+  height: 175px;
+}
+
+.clock__number {
+  position: relative;
+}
+
+.clock__time,
+.clock__separation {
+  color: lightseagreen;
+  position: relative;
+}
+
+.clock__time {
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+
+.clock__separation {
+  color: lightseagreen;
+  position: relative;
+  animation: blink 1s linear infinite;
+}
+
+.clock__separation::before,
+.clock__separation::after {
+  position: absolute;
+  content: '';
+  top: 50px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  background-color: lightseagreen;
+  animation: blink 1s linear infinite;
+}
+
+.clock__separation::after {
+  top: 90px;
+}
+
+.clock__time::before,
+.clock__separation::before,
+.clock__separation::after {
+  filter: blur(10px);
+}
+
+.clock__time::before {
+  content: attr(data-time);
+  position: absolute;
+}
+
+.days {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 500px;
+  font-size: 1rem;
+  color: rgb(0 0 0 / 0.5);
+}
+
+.days--active {
+  color: lightseagreen;
+  text-shadow: 0 0 3px lightseagreen;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    color: lightseagreen;
+  }
+
+  50%,
+  100% {
+    color: rgb(0 0 0 / 0.2);
+    background-color: transparent;
+  }
+}
