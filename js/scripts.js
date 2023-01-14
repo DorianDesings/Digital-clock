@@ -1,52 +1,68 @@
-const firstNumber = document.getElementById('first-number');
-const secondNumber = document.getElementById('second-number');
-const thirdNumber = document.getElementById('third-number');
-const fourthNumber = document.getElementById('fourth-number');
-const fifthNumber = document.getElementById('fifth-number');
-const sixthNumber = document.getElementById('sixth-number');
-const days = document.getElementById('days');
+const hoursElement = document.getElementById('hours');
+const minutesElement = document.getElementById('minutes');
+const dayOfWeekElement = document.getElementById('day-of-week');
+const dayElement = document.getElementById('day');
+const monthElement = document.getElementById('month');
+const yearElement = document.getElementById('year');
+const hoursHandElement = document.getElementById('hour-hand');
+const minutesHandElement = document.getElementById('minute-hand');
+const secondsHandElement = document.getElementById('second-hand');
 
-const getDay = () => {
-  const today = new Date().getDay();
-  days.children[today === 0 ? 6 : today - 1].classList.add('days--active');
-};
+const days = [
+  'Monday',
+  'Tusday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday'
+];
 
-console.dir(days);
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
 
-const getNumbers = () => {
+const setClocks = () => {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
+  const today = now.getDay();
+  const date = now.getDate();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
 
-  const hoursArray = hours.toString().split('');
-  const minutesArray = minutes.toString().split('');
-  const secondsArray = seconds.toString().split('');
+  hoursElement.textContent = hours < 10 ? '0' + hours : hours;
+  minutesElement.textContent = minutes < 10 ? '0' + minutes : minutes;
 
-  return {
-    firstNumber: hours < 10 ? 0 : hoursArray[0],
-    secondNumber: hours < 10 ? hoursArray[0] : hoursArray[1],
-    thirdNumber: minutes < 10 ? 0 : minutesArray[0],
-    fourthNumber: minutes < 10 ? minutesArray[0] : minutesArray[1],
-    fifthNumber: seconds < 10 ? 0 : secondsArray[0],
-    sixthNumber: seconds < 10 ? secondsArray[0] : secondsArray[1]
-  };
+  dayOfWeekElement.textContent = today === 0 ? days[6] : days[today - 1];
+  dayElement.textContent = date;
+  monthElement.textContent = months[currentMonth];
+  yearElement.textContent = currentYear;
+
+  const secondsDegrees = (seconds / 60) * 360 + 90;
+  secondsHandElement.style.transform = `rotate(${secondsDegrees}deg)`;
+
+  const minutesDegrees = (minutes / 60) * 360 + (seconds / 60) * 6 + 90;
+  minutesHandElement.style.transform = `rotate(${minutesDegrees}deg)`;
+
+  const hourDegrees = (hours / 12) * 360 + (minutes / 60) * 30 + 90;
+  hoursHandElement.style.transform = `rotate(${hourDegrees}deg)`;
 };
 
 setInterval(() => {
-  const numbers = getNumbers();
-  firstNumber.textContent = numbers.firstNumber;
-  firstNumber.dataset.time = numbers.firstNumber;
-  secondNumber.textContent = numbers.secondNumber;
-  secondNumber.dataset.time = numbers.secondNumber;
-  thirdNumber.textContent = numbers.thirdNumber;
-  thirdNumber.dataset.time = numbers.thirdNumber;
-  fourthNumber.textContent = numbers.fourthNumber;
-  fourthNumber.dataset.time = numbers.fourthNumber;
-  fifthNumber.textContent = numbers.fifthNumber;
-  fifthNumber.dataset.time = numbers.fifthNumber;
-  sixthNumber.textContent = numbers.sixthNumber;
-  sixthNumber.dataset.time = numbers.sixthNumber;
+  setClocks();
 }, 1000);
 
-getDay();
+setClocks();

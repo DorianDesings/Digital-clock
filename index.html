@@ -4,47 +4,46 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Reloj Mundial</title>
   </head>
   <body>
-    <div id="clock" class="clock">
-      <div class="clock__number">
-        8
-        <div id="first-number" class="clock__time" data-time="1">1</div>
+    <main class="main">
+      <div class="main-clocks">
+        <div class="digital-clock">
+          <div class="time">
+            <span id="hours" class="hours">11</span>
+            <span class="separator">:</span>
+            <span id="minutes" class="minutes">06</span>
+          </div>
+          <div class="date">
+            <span id="day-of-week">Saturday</span>
+            <span id="day" class="day">14</span>
+            <span id="month" class="month">January</span>
+            <span id="year" class="year">2023</span>
+          </div>
+        </div>
+        <div class="analogic-clock">
+          <div class="outer-clock-face">
+            <div class="marking marking-one"></div>
+            <div class="marking marking-two"></div>
+            <div class="marking marking-three"></div>
+            <div class="marking marking-four"></div>
+            <div class="inner-clock-face">
+              <div id="hour-hand" class="hand hour-hand"></div>
+              <div id="minute-hand" class="hand min-hand"></div>
+              <div id="second-hand" class="hand second-hand"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="clock__number">
-        8
-        <div id="second-number" class="clock__time" data-time="1">1</div>
-      </div>
-      <span class="clock__separation">:</span>
-      <div class="clock__number">
-        8
-        <div id="third-number" class="clock__time" data-time="1">1</div>
-      </div>
-      <div class="clock__number">
-        8
-        <div id="fourth-number" class="clock__time" data-time="1">1</div>
-      </div>
-      <span class="clock__separation">:</span>
-      <div class="clock__number">
-        8
-        <div id="fifth-number" class="clock__time" data-time="1">1</div>
-      </div>
-      <div class="clock__number">
-        8
-        <div id="sixth-number" class="clock__time" data-time="1">1</div>
-      </div>
-      <div id="days" class="days">
-        <div>Monday</div>
-        <div>Tuesday</div>
-        <div>Wednesday</div>
-        <div>Thursday</div>
-        <div>Friday</div>
-        <div>Saturday</div>
-        <div>Sunday</div>
-      </div>
-    </div>
+    </main>
     <script src="js/scripts.js"></script>
   </body>
 </html>
