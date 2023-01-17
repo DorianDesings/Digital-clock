@@ -9,13 +9,13 @@ const minutesHandElement = document.getElementById('minute-hand');
 const secondsHandElement = document.getElementById('second-hand');
 
 const days = [
+  'Sunday',
   'Monday',
   'Tusday',
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday',
-  'Sunday'
+  'Saturday'
 ];
 
 const months = [
@@ -33,6 +33,10 @@ const months = [
   'December'
 ];
 
+const fixTime = number => (number < 10 ? '0' + number : number);
+const getDayOfWeek = today => days[today];
+const getMonth = currentMonth => months[currentMonth];
+
 const setClocks = () => {
   const now = new Date();
   const hours = now.getHours();
@@ -43,21 +47,21 @@ const setClocks = () => {
   const currentMonth = now.getMonth();
   const currentYear = now.getFullYear();
 
-  hoursElement.textContent = hours < 10 ? '0' + hours : hours;
-  minutesElement.textContent = minutes < 10 ? '0' + minutes : minutes;
+  hoursElement.textContent = fixTime(hours);
+  minutesElement.textContent = fixTime(minutes);
 
-  dayOfWeekElement.textContent = today === 0 ? days[6] : days[today - 1];
+  dayOfWeekElement.textContent = getDayOfWeek(today);
   dayElement.textContent = date;
-  monthElement.textContent = months[currentMonth];
+  monthElement.textContent = getMonth(currentMonth);
   yearElement.textContent = currentYear;
 
-  const secondsDegrees = (seconds / 60) * 360 + 90;
+  const secondsDegrees = seconds * 6;
   secondsHandElement.style.transform = `rotate(${secondsDegrees}deg)`;
 
-  const minutesDegrees = (minutes / 60) * 360 + (seconds / 60) * 6 + 90;
+  const minutesDegrees = minutes * 6 + seconds / 10;
   minutesHandElement.style.transform = `rotate(${minutesDegrees}deg)`;
 
-  const hourDegrees = (hours / 12) * 360 + (minutes / 60) * 30 + 90;
+  const hourDegrees = hours * 30 + minutes / 2;
   hoursHandElement.style.transform = `rotate(${hourDegrees}deg)`;
 };
 
